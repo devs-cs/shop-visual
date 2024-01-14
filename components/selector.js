@@ -8,7 +8,7 @@ const MyButtonGroup = ({selected, setSelected, select_reset,non_sketch_reset}) =
     setSelected(index);
     if (index == 2)
       select_reset()
-    else if (index  == 0)
+    else
       non_sketch_reset()
   };
   const titles = ["Composition Edits", "Generation", "Sketch"]

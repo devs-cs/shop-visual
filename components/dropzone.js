@@ -25,7 +25,7 @@ export default function Dropzone(props) {
         {isDragActive ? (
           <p>Drop the image here ...</p>
         ) : (
-          <p>Optional: Drag and drop a starting image here</p>
+          <p> {props.selected != 0 && "Optional:"} Drag and drop a starting image here</p>
         )}
       </div>
     </div>

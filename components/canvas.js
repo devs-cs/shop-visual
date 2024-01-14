@@ -36,6 +36,7 @@ export default class Canvas extends React.Component {
 
     const predicting = predictions.some((prediction) => !prediction.output);
     const lastPrediction = predictions[predictions.length - 1];
+
     
     return (
       <div className="relative w-full aspect-square">
@@ -91,7 +92,7 @@ export default class Canvas extends React.Component {
                 strokeColor={this.props.select == 0 ? "transparent": "black"}
                 canvasColor="transparent"
                 onChange={this.onChange}
-                style={this.props.select == 1? {opacity: 0.5} : {}}
+                style={this.props.select == 1? {opacity: 0.5} : this.props.select == 0? {opacity: 0} : {}}
               />
             </div>
           )}
