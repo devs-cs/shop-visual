@@ -1,10 +1,7 @@
 **Note**: To decrease costs, I changed the GPU post hackathon. Occasionally the rented A40 GPU will run out of CUDA memory. If this happens, wait a few minutes for cleaning
 and try again.
 
-# ShopVisual
-
-## Design Your World
-### Shop Visual
+# ShopVisual: Design Your World
 
 When there are _billions_ of purchasable items, natural language queries are simply not enough to narrow the choices down.
 
