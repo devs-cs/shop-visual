@@ -151,10 +151,16 @@ export default function Home() {
 
     const giveTips = () => {
         var msg = "";
-        if (selected == 0) msg = 'Type a command corresponding to a thematic change, such as "make the texture softer"';
-        else if (selected == 1) msg = "Type the visual description of the scene you want, masking elements you wish to keep";
-        else msg = "Draw an outline and type a visual description of the scene you want";
-        setTipMsg(msg);
+        if (tipMsg){
+          setTipMsg(null)
+        }
+        else {
+          if (selected == 0) msg = 'Type a command corresponding to a thematic change, such as "make the texture softer"';
+          else if (selected == 1) msg = "Type the visual description of the scene you want, masking elements you wish to keep";
+          else msg = "Draw an outline and type a visual description of the scene you want";
+          setTipMsg(msg);
+        }
+
     };
 
     const processError = (err) => {
