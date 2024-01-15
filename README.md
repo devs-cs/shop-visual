@@ -2,8 +2,6 @@
 
 # ShopVisual: Design Your World
 
-![DEMO VIDEO TO BE POSTED](./demo.mp4) 
-
 When there are _billions_ of purchasable items, natural language queries are simply not enough to narrow the choices down.
 
 **We are redefining shopping through accessible image interfaces.**
