@@ -19,6 +19,8 @@ export default async function handler(req, res) {
   console.log("HERE IS BODY" + req.body)
   if (req.body.selected === 2)
     vers  = "435061a1b5a4c1e26740464bf786efdfa9cb3a3ac488595a2de23e143fdb0117" 
+  else if (req.body.selected ==1 && req.body.mask )
+    vers= "e490d072a34a94a11e9711ed5a6ba621c3fab884eda1665d9d3a282d65a21180" // ST "39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b"
   else if (req.body.selected ==1)
     vers= "39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b"
   else if (req.body.selected == 0)

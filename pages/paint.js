@@ -35,17 +35,20 @@ export default function Home() {
         const prevPredictionOutput = prevPrediction?.output ? prevPrediction.output[prevPrediction.output.length - 1] : null;
 
         var body;
+        var img = userUploadedImage? await resizeImageBlob(userUploadedImage, 512, 512) : null
         if (selected == 1) {
             body = {
                 prompt: e.target.prompt.value,
-                image: userUploadedImage
-                    ? await readAsDataURL(userUploadedImage)
+                image: img
+                    ? await readAsDataURL(img)
                     : // only use previous prediction as init image if there's a mask
                     maskImage
                     ? prevPredictionOutput
                     : null,
                 mask: maskImage,
+                invert_mask: true,
                 selected: 1,
+                
             };
         } else if (selected == 2) {
             body = {
@@ -53,10 +56,10 @@ export default function Home() {
                 image: maskImage,
                 selected: 2,
             };
-        } else if (userUploadedImage) {
+        } else if (img) {
             body = {
                 prompt: e.target.prompt.value,
-                image: await readAsDataURL(userUploadedImage),
+                image: await readAsDataURL(img),
                 selected: 0,
             };
         }
@@ -100,20 +103,36 @@ export default function Home() {
     };
 
     function imageUrlToBlob(imageUrl) {
-        return fetch(imageUrl)
-            .then((response) => {
-                // Check if the fetch was successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                // Convert the response to a blob
-                return response.blob();
-            })
-            .catch((e) => {
-                console.error("There was a problem fetching the image:", e);
-                throw e; // Re-throw the error for further handling
-            });
-    }
+      return fetch(imageUrl)
+          .then((response) => {
+              // Check if the fetch was successful
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              // Convert the response to a blob
+              return response.blob();
+          })
+          .catch((e) => {
+              console.error("There was a problem fetching the image:", e);
+              throw e; // Re-throw the error for further handling
+          });
+  }
+  
+  function resizeImageBlob(blob, width, height) {
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.onload = () => {
+            let canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+            canvas.toBlob(resolve, blob.type);
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(blob);
+    });
+}
+
 
     const select_reset = async () => {
         setPredictions([]);
@@ -156,7 +175,7 @@ export default function Home() {
         }
         else {
           if (selected == 0) msg = 'Type a command corresponding to a thematic change, such as "make the texture softer"';
-          else if (selected == 1) msg = "Type the visual description of the scene you want, masking elements you wish to keep";
+          else if (selected == 1) msg = "Type the visual description of the scene you want, masking elements you wish to edit";
           else msg = "Draw an outline and type a visual description of the scene you want";
           setTipMsg(msg);
         }
@@ -169,7 +188,7 @@ export default function Home() {
       else
         return "Diffusion models failed — " + err
       };
-
+      
     return (
         <div>
             <Head>
@@ -211,7 +230,7 @@ export default function Home() {
                     <PromptForm onSubmit={handleSubmit} />
 
                     {finalURL && (
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className = "mb-3" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                 <Button
                                     variant="contained"

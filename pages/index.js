@@ -32,7 +32,7 @@ export default function About() {
 
 
       <p className  = "pb-5 text-lg">
-      In the spirit of an image is worth 1000 words, we are making it easy to search for and find what would otherwise be complicated queries and allowing you to see those items, rather than simply describe them.
+      Knowing that an image is worth 1000 words, we are making shopping faster and more effective, reducing queries and offering images in context.
       </p>
 
       <p className="pb-5 text-lg">
