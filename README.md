@@ -5,8 +5,6 @@ and try again.]
 
 When there are _billions_ of purchasable items, natural language queries are simply not enough to narrow the choices down.
 
-![Video of product demo](/demo.mp4)
-
 **We are redefining shopping through accessible image interfaces.**
 
 In the spirit of an image is worth 1000 words, we are making it easy to search for and find what would otherwise be complicated queries and allowing you to see those items, rather than simply describe them.
